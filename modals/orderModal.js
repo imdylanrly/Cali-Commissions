@@ -64,7 +64,7 @@ module.exports = {
     ];
 
     const channel = await interaction.guild.channels.create({
-      name: `general-${username}`,
+      name: `order-${username}`,
       type: ChannelType.GuildText,
       parent: CATEGORY_ID,
       topic: interaction.user.id,
