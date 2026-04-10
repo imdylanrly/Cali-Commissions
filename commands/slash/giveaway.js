@@ -167,7 +167,7 @@ module.exports = {
         }
 
         await giveawayMessage.reply({
-          content: `<:giveaway:1473042870280917066> **Congratulations** ${winners.map(id => `<@${id}>`).join(", ")} on winning **${giveaway.prize}**!`
+          content: `<:Confetti:1473759358562205716> **Congratulations** ${winners.map(id => `<@${id}>`).join(", ")} on winning **${giveaway.prize}**!`
         });
       }
 
