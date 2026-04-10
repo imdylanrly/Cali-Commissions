@@ -1,7 +1,7 @@
 const { PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
-  customId: "p_289669033127579659",
+  customId: "p_289676018401153028",
 
   async execute(interaction) {
 
@@ -20,28 +20,27 @@ module.exports = {
     }
 
     const message = interaction.message;
+
     const components = message.components.map(row => ({
       ...row.toJSON(),
       components: row.components.map(btn => {
         const data = btn.toJSON();
 
-        // 🔄 CLAIM → UNCLAIM
-        if (data.custom_id === "p_289669033127579659") {
+        if (data.custom_id === "p_289676018401153028") {
           return {
             ...data,
             label: "Unclaim",
             custom_id: "unclaim_order",
-            style: 4 // red
+            style: 4
           };
         }
 
-        // 🔄 UNCLAIM → CLAIM
         if (data.custom_id === "unclaim_order") {
           return {
             ...data,
             label: "Claim",
-            custom_id: "p_289669033127579659",
-            style: 3 // green
+            custom_id: "p_289676018401153028",
+            style: 3
           };
         }
 
@@ -49,22 +48,38 @@ module.exports = {
       })
     }));
 
-    // 🔁 EDIT ORIGINAL MESSAGE
-    await interaction.update({
-      components
-    });
+    await interaction.update({ components });
 
-    // 🔔 SEND FEEDBACK
-    if (interaction.customId === "p_289669033127579659") {
+    if (interaction.customId === "p_289676018401153028") {
       await interaction.followUp({
-        content: `Order has been claimed by ${interaction.user}.`,
-        ephemeral: true
-      });
+  "flags": 32768,
+  "components": [
+    {
+      "type": 17,
+      "components": [
+        {
+          "type": 10,
+          "content": `Order has been claimed by ${interaction.user}.`
+        }
+      ]
+    }
+  ]
+});
     } else {
       await interaction.followUp({
-        content: `Order has been unclaimed by ${interaction.user}.`,
-        ephemeral: true
-      });
+  "flags": 32768,
+  "components": [
+    {
+      "type": 17,
+      "components": [
+        {
+          "type": 10,
+          "content": `Order unclaimed by ${interaction.user}.`
+        }
+      ]
+    }
+  ]
+});
     }
   }
 };
