@@ -46,7 +46,9 @@ for (const row of components) {
   }
 }
 
-await interaction.update({
+await interaction.deferUpdate();
+
+await interaction.message.edit({
   components
 });
 
