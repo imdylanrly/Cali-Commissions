@@ -8,7 +8,7 @@ const {
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("giveaway")
-    .setDescription("Create a giveaway.")
+    .setDescription("Start a giveaway.")
     .addStringOption(option =>
       option.setName("prize").setDescription("Input the prize to giveaway.").setRequired(true)
     )
