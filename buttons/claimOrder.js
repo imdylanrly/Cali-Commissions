@@ -19,51 +19,36 @@ module.exports = {
       });
     }
 
-    const message = interaction.message;
+ const message = interaction.message;
 
-const newRows = message.components.map(row => {
-  const newRow = new ActionRowBuilder();
+// clone original message structure
+const components = JSON.parse(JSON.stringify(message.components));
 
-  row.components.forEach(btn => {
-    const data = btn.toJSON();
+for (const row of components) {
+  for (const comp of row.components || []) {
 
-    // 🛑 SKIP NON-BUTTONS
-    if (!data.custom_id) return;
+    // ONLY touch buttons
+    if (comp.type === 2) {
 
-    if (data.custom_id === "p_289676018401153028") {
-      newRow.addComponents(
-        new ButtonBuilder()
-          .setCustomId("unclaim_order")
-          .setLabel("Unclaim")
-          .setStyle(4)
-      );
+      if (comp.custom_id === "p_289676018401153028") {
+        comp.label = "Unclaim";
+        comp.custom_id = "unclaim_order";
+        comp.style = 4;
+      }
+
+      else if (comp.custom_id === "unclaim_order") {
+        comp.label = "Claim";
+        comp.custom_id = "p_289676018401153028";
+        comp.style = 3;
+      }
+
     }
+  }
+}
 
-    else if (data.custom_id === "unclaim_order") {
-      newRow.addComponents(
-        new ButtonBuilder()
-          .setCustomId("p_289676018401153028")
-          .setLabel("Claim")
-          .setStyle(3)
-      );
-    }
-
-    else {
-      newRow.addComponents(
-        new ButtonBuilder()
-          .setCustomId(data.custom_id)
-          .setLabel(data.label)
-          .setStyle(data.style)
-      );
-    }
-  });
-
-  return newRow;
+await interaction.update({
+  components
 });
-
-    await interaction.update({
-      components: newRows
-    });
 
     if (interaction.customId === "p_289676018401153028") {
       await interaction.followUp({
