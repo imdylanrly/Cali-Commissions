@@ -1,22 +1,22 @@
 module.exports = {
-  customId: "p_287423453651275777",
+  customId: "p_289669033127579659",
 
   async execute(interaction) {
-    const STAFF_ROLE_IDS = ["1489134358123122749", "1489134347318460496"];
+    const STAFF_ROLE_IDS = ["1490556337568878766", "1490556336893595808"];
 
     const isAdmin = interaction.member.permissions.has("Administrator");
     const hasRole = interaction.member.roles.cache.has(STAFF_ROLE_IDS);
 
     if (!isAdmin && !hasRole) {
       return interaction.reply({
-        content: "<:colorado_xMark:1489742650973356052> You do **not** have **permission** to use this button.",
+        content: "You do not have permission to use this button.",
         flags: 64
       });
     }
 
     if (!interaction.channel.topic || !/^\d+$/.test(interaction.channel.topic)) {
       return interaction.reply({
-        content: "<:colorado_xMark:1489742650973356052> You can only close a ticket.",
+        content: "You can only close a ticket.",
         flags: 64
       });
     }
