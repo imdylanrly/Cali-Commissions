@@ -21,42 +21,45 @@ module.exports = {
 
     const message = interaction.message;
 
-    const newRows = message.components.map(row => {
-      const newRow = new ActionRowBuilder();
+const newRows = message.components.map(row => {
+  const newRow = new ActionRowBuilder();
 
-      row.components.forEach(btn => {
-        const data = btn.toJSON();
+  row.components.forEach(btn => {
+    const data = btn.toJSON();
 
-        if (data.custom_id === "p_289676018401153028") {
-          newRow.addComponents(
-            new ButtonBuilder()
-              .setCustomId("unclaim_order")
-              .setLabel("Unclaim")
-              .setStyle(4)
-          );
-        }
+    // 🛑 SKIP NON-BUTTONS
+    if (!data.custom_id) return;
 
-        else if (data.custom_id === "unclaim_order") {
-          newRow.addComponents(
-            new ButtonBuilder()
-              .setCustomId("p_289676018401153028")
-              .setLabel("Claim")
-              .setStyle(3)
-          );
-        }
+    if (data.custom_id === "p_289676018401153028") {
+      newRow.addComponents(
+        new ButtonBuilder()
+          .setCustomId("unclaim_order")
+          .setLabel("Unclaim")
+          .setStyle(4)
+      );
+    }
 
-        else {
-          newRow.addComponents(
-            new ButtonBuilder()
-              .setCustomId(data.custom_id)
-              .setLabel(data.label)
-              .setStyle(data.style)
-          );
-        }
-      });
+    else if (data.custom_id === "unclaim_order") {
+      newRow.addComponents(
+        new ButtonBuilder()
+          .setCustomId("p_289676018401153028")
+          .setLabel("Claim")
+          .setStyle(3)
+      );
+    }
 
-      return newRow;
-    });
+    else {
+      newRow.addComponents(
+        new ButtonBuilder()
+          .setCustomId(data.custom_id)
+          .setLabel(data.label)
+          .setStyle(data.style)
+      );
+    }
+  });
+
+  return newRow;
+});
 
     await interaction.update({
       components: newRows
