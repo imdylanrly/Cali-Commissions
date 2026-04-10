@@ -78,7 +78,7 @@ module.exports = {
           "items": [
             {
               "media": {
-                "url": "https://media.discordapp.net/attachments/1489468878936608809/1489469380763848775/Screenshot_2026-02-19_212527.png?ex=69d130b5&is=69cfdf35&hm=9ea00a8be9133fe93d55e067bbd4019b8d7c1d4a050cd424e4e7bd1f15d18a09&=&format=webp&quality=lossless"
+                "url": "https://media.discordapp.net/attachments/1490556464119681088/1492066109652865156/8.png?ex=69d9fa59&is=69d8a8d9&hm=78358ac58cca70a4f3d4c8ccda89a474551d66ca621eefb9402edfde70c0047c&=&format=webp&quality=lossless"
               }
             }
           ]
