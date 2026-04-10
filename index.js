@@ -14,6 +14,19 @@ const client = new Client({
 
 client.prefix = "-";
 
+const Database = require("better-sqlite3");
+client.db = new Database("./database.sqlite");
+
+client.db.prepare(`
+  CREATE TABLE IF NOT EXISTS giveaways (
+    messageId TEXT PRIMARY KEY,
+    channelId TEXT NOT NULL,
+    prize TEXT NOT NULL,
+    winnerCount INTEGER NOT NULL,
+    endTime INTEGER NOT NULL,
+    entries TEXT NOT NULL
+  )
+`).run();
 // collections
 client.prefixCommands = new Collection();
 client.slashCommands = new Collection();
