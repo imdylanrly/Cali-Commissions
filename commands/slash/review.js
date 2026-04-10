@@ -77,6 +77,7 @@ module.exports = {
   ]
 })
 
+    await interaction.reply("<:Check:1473759297560379504> Succesfully sent review.")
 
     }
 
