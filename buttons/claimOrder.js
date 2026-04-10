@@ -1,4 +1,4 @@
-const { PermissionFlagsBits } = require("discord.js");
+const { PermissionFlagsBits, ActionRowBuilder, ButtonBuilder } = require("discord.js");
 
 module.exports = {
   customId: "p_289676018401153028",
@@ -21,34 +21,46 @@ module.exports = {
 
     const message = interaction.message;
 
-    const components = message.components.map(row => ({
-      ...row.toJSON(),
-      components: row.components.map(btn => {
+    const newRows = message.components.map(row => {
+      const newRow = new ActionRowBuilder();
+
+      row.components.forEach(btn => {
         const data = btn.toJSON();
 
         if (data.custom_id === "p_289676018401153028") {
-          return {
-            ...data,
-            label: "Unclaim",
-            custom_id: "unclaim_order",
-            style: 4
-          };
+          newRow.addComponents(
+            new ButtonBuilder()
+              .setCustomId("unclaim_order")
+              .setLabel("Unclaim")
+              .setStyle(4)
+          );
         }
 
-        if (data.custom_id === "unclaim_order") {
-          return {
-            ...data,
-            label: "Claim",
-            custom_id: "p_289676018401153028",
-            style: 3
-          };
+        else if (data.custom_id === "unclaim_order") {
+          newRow.addComponents(
+            new ButtonBuilder()
+              .setCustomId("p_289676018401153028")
+              .setLabel("Claim")
+              .setStyle(3)
+          );
         }
 
-        return data;
-      })
-    }));
+        else {
+          newRow.addComponents(
+            new ButtonBuilder()
+              .setCustomId(data.custom_id)
+              .setLabel(data.label)
+              .setStyle(data.style)
+          );
+        }
+      });
 
-    await interaction.update({ components });
+      return newRow;
+    });
+
+    await interaction.update({
+      components: newRows
+    });
 
     if (interaction.customId === "p_289676018401153028") {
       await interaction.followUp({
