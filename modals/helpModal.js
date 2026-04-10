@@ -114,8 +114,22 @@ module.exports = {
           "spacing": 2
         },
         {
-          "type": 10,
-          "content": `A new support ticket has been opened. Ensure to assist the user promptly. Ensure to not ping any staff members as they have already been notified of your ticket being opened.\n\n**Inquiry:** ${reason}`
+          "type": 9,
+          "components": [
+            {
+              "type": 10,
+              "content": `A new support ticket has been opened. Ensure to assist the user promptly. Ensure to not ping any staff members as they have already been notified of your ticket being opened.\n\n**Inquiry:** ${reason}`
+            }
+          ],
+          "accessory": {
+            "style": 4,
+            "type": 2,
+            "label": "Close",
+            "flow": {
+              "actions": []
+            },
+            "custom_id": "p_289669033127579659"
+          }
         },
         {
           "type": 14,

@@ -3,7 +3,7 @@ module.exports = {
 
     async execute (interaction) {
         return interaction.reply({
-  "flags": 32768,
+  "flags": 32832,
   "components": [
     {
       "type": 17,
