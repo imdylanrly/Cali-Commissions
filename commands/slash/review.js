@@ -34,9 +34,9 @@ module.exports = {
     async execute(interaction, client) {
 
         const TARGET_CHANNEL_ID = "1491456632876564694";
-        const channel = interaction.guild.chnanels.cache.get(TARGET_CHANNEL_ID)
+        const channel = interaction.guild.channels.cache.get(TARGET_CHANNEL_ID)
 
-        const user = interaction.options.getUser("user");
+        const user = interaction.options.getUser("designer");
         const rating = interaction.options.getString("rating");
         const feedback = interaction.options.getString("feedback");
 
