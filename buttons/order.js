@@ -32,7 +32,7 @@ module.exports = {
 
     const row1 = new ActionRowBuilder().addComponents(budgetInput);
     const row2 = new ActionRowBuilder().addComponents(descriptionInput);
-    const row3 = new ActionRowBuilder().addComponents(quantity)
+    const row3 = new ActionRowBuilder().addComponents(quantityInput)
 
     modal.addComponents(row1, row2, row3);
 
